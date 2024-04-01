@@ -44,6 +44,8 @@ class Config:
                 self.debug = config.get("debug", False)
                 self.connectorDrops = config.get("connectorDropsUrl", "")
                 self.showHistoricalDrops = config.get("showHistoricalDrops", True)
+                self.RIOT_API_KEY = config.get("RIOT_API_KEY", self.RIOT_API_KEY);
+                print(f"Using RIOT_API_KEY: {self.RIOT_API_KEY}")
         except FileNotFoundError as ex:
             print(f"[red]CRITICAL ERROR: The configuration file cannot be found at {configPath}\nHave you extacted the ZIP archive and edited the configuration file?")
             print("Press any key to exit...")
