@@ -47,11 +47,11 @@ class GuiThread(Thread):
         """
         Report the status of all accounts
         """
-        console = Console(force_terminal=True)
+        console = Console(force_terminal=True,force_interactive=False)
         with Live(self.generateTable(), auto_refresh=False, console=console) as live:
             while True:
                 live.update(self.generateTable())
-                sleep(1)
+                sleep(10)
                 self.locks["refreshLock"].acquire()
                 live.refresh()
                 if self.locks["refreshLock"].locked():

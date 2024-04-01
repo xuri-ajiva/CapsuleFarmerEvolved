@@ -1,8 +1,8 @@
 import logging
 from logging.handlers import RotatingFileHandler
 
-FILE_SIZE = 1024 * 1024 * 100  # 100 MB
-BACKUP_COUNT = 5  # keep up to 5 files
+FILE_SIZE = 1024 * 1024 * 10  # 10 MB
+BACKUP_COUNT = 2  # keep up to 5 files
 
 
 class Logger:
