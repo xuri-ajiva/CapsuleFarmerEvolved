@@ -23,8 +23,8 @@ class GuiThread(Thread):
         self.stats = stats
         self.locks = locks
     
-    def generateTable(self):
-        table = Table()
+    def generateTable(self, header):
+        table = Table(show_header=header, show_edge=False)
         table.add_column("Account")
         table.add_column("Status")
         table.add_column("Live matches")
@@ -47,16 +47,13 @@ class GuiThread(Thread):
         """
         Report the status of all accounts
         """
-        console = Console(force_terminal=True,force_interactive=False)
-        with Live(self.generateTable(), auto_refresh=False, console=console) as live:
-            while True:
-                live.update(self.generateTable())
-                sleep(10)
-                self.locks["refreshLock"].acquire()
-                live.refresh()
-                if self.locks["refreshLock"].locked():
-                    self.locks["refreshLock"].release()
-                
+        console = Console(force_terminal=True)
+        i = 0;
+        while True:
+            console.print(self.generateTable((i%100) == 0))
+            sleep(10)
+            i += 1
+
     def stop(self):
         """
         Try to stop gracefully
